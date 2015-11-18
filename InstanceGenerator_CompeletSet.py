@@ -12,8 +12,8 @@ Set_RequestIndex = set(range(1, NumberOfRequest + 1))  # Create a set of request
 
 PriceGenerationFlag = int(input('random price generation, input 1, request-based price generation, input 2 :'))
 
-#FileName_LagrangianApproach = input('Please name a file for the instance data of Lagrangian Approach :')
-#FileName_Solver = input('Please name a file for the instance data of Solvers (Such as Gurobi, Cplex, Xpress):')
+FileName_LagrangianApproach = input('Please name a file for the instance data of Lagrangian Approach :')
+FileName_Solver = input('Please name a file for the instance data of Solvers (Such as Gurobi, Cplex, Xpress):')
 
 def BidPriceGenerator_RequestPriceBased(SellList,BuyList,RequestPriceDict):
     BuyRequestSum = 0
@@ -92,7 +92,7 @@ def BidGenerator(Carrier_Request_Dict,NumberOfCarrier,PriceGenerationFlag):
     return BidCollection
 
 def LagrangianFileCreation(NumberOfCarrier,NumberOfRequest,BidCollection):
-    output = open('4-11-8118-rb-C-002.pkl', 'wb')
+    output = open(FileName_LagrangianApproach, 'wb')
     pickle.dump(NumberOfCarrier, output)
     pickle.dump(NumberOfRequest, output)
     pickle.dump(BidCollection, output)
@@ -149,7 +149,7 @@ def GUROBIFileCreation(Set_CarrierIndex,Set_RequestIndex,Carrier_Request_Dict,Bi
         Bid_Price_MIP['B'+str(x)] = BidCollection[x][2]
     '''print (Bid_Price_MIP)'''
 
-    output = open('4-11-8118-rb-C-002_MIP.pkl', 'wb')
+    output = open(FileName_Solver, 'wb')
     pickle.dump(Bid_MIP, output)
     pickle.dump(Carriers_MIP, output)
     pickle.dump(Requests_MIP, output)
